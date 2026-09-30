@@ -6,7 +6,10 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const API_KEY = process.env.NEWS_API_KEY || '3c959958520b425a9554070cbb708cc6';
+const API_KEY = process.env.NEWS_API_KEY;
+if (!API_KEY) {
+    console.warn('NEWS_API_KEY is not set. Add it to .env before starting the server.');
+}
 const API_BASE = 'https://newsapi.org/v2';
 
 // Simple in-memory cache
